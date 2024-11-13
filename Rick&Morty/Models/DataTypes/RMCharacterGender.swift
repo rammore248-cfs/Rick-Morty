@@ -12,4 +12,10 @@ enum RMCharacterGender: String, Codable {
     case female = "Female"
     case genderless = "Genderless"
     case unknown = "Unknown"
+    
+    init(from decoder: Decoder) throws {
+           let container = try decoder.singleValueContainer()
+           let value = try? container.decode(String.self)
+           self = RMCharacterGender(rawValue: value ?? "") ?? .unknown
+       }
 }
